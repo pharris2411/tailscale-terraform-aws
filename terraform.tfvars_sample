@@ -1,0 +1,26 @@
+# Application Definition
+app_name = "zim2411_proxy" # Do NOT enter any spaces
+app_environment = "test" # Dev, Test, Prod, etc
+
+#AWS authentication variables
+aws_access_key = ""
+aws_secret_key = ""
+aws_key_pair_name = "aws_ssh_key"
+aws_key_pair_file = "aws_ssh_key.pem"
+aws_region = "us-east-1"
+
+# Application access
+app_sources_cidr = ["0.0.0.0/0"] # Specify a list of IPv4 IPs/CIDRs which can access app load balancers
+admin_sources_cidr = ["0.0.0.0/0"] # Specify a list of IPv4 IPs/CIDRs which can admin instances
+
+proxy_registry = "zim2411"
+
+# These values are fed to the linuxserver/swag container, check their documentation for details. 
+# you may need to map more variables as I did not use everything available.
+
+proxy_tz = "America/New_York"
+proxy_validation = "duckdns"
+proxy_duckdnstoken = ""
+proxy_subdomains = "wildcard"
+proxy_url = ""
+proxy_email = ""

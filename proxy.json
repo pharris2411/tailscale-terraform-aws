@@ -1,0 +1,55 @@
+[
+  {
+    "name": "${app_name}",
+    "image": "${app_image}",
+    "environment": [
+        {"name": "PGID", "value": "1000" }, 
+        {"name": "PUID", "value": "1000" }, 
+        {"name": "TZ", "value": "${proxy_tz}" }, 
+        {"name": "VALIDATION", "value": "${proxy_validation}" }, 
+        {"name": "DUCKDNSTOKEN", "value": "${proxy_duckdnstoken}" }, 
+        {"name": "SUBDOMAINS", "value": "${proxy_subdomains}" }, 
+        {"name": "URL", "value": "${proxy_url}" }, 
+        {"name": "EMAIL", "value": "${proxy_email}" }, 
+        {"name": "PATH", "value": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" }, 
+        {"name": "TERM", "value": "xterm" }, 
+        {"name": "DHLEVEL", "value": "2048" }, 
+        {"name": "ONLY_SUBDOMAINS", "value": "false" }, 
+        {"name": "AWS_CONFIG_FILE", "value": "/config/dns-conf/route53.ini" }, 
+        {"name": "S6_BEHAVIOUR_IF_STAGE2_FAILS", "value": "2" }
+      ],
+      "privileged": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80
+        },
+        {
+          "containerPort": 443,
+          "hostPort": 443
+        },
+        {
+          "containerPort": 21,
+          "hostPort": 21
+        },
+        {
+          "containerPort": 41641,
+          "hostPort": 41641
+        }
+      ],
+     
+    "cpu": ${ec2_cpu},
+    "memory": ${ec2_memory},
+    "networkMode": "awsvpc",
+    "mountPoints" : [
+        {
+           "containerPath" : "/var/lib/tailscale/",
+           "sourceVolume" : "tailscale"
+        },
+        {
+           "containerPath" : "/config/",
+           "sourceVolume" : "config"
+        }
+    ]
+  }
+]
